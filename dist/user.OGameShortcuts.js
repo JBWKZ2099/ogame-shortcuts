@@ -14,9 +14,6 @@
 {
 	var theHref = document.location.href;
 
-	if( theHref.indexOf("/game/index.php?page=chat")>0 )
-		return;
-
 	// The following "if" is not really necessary but with it this script will work for Opera too
 	if ((theHref.indexOf ("/game/index.php?")                  <  0) ||
 	    (theHref.indexOf ("/game/index.php?page=notices")      > -1) ||
@@ -193,6 +190,17 @@
 		      $ ("table").is (".createnote") ||
 		      $ ("body").is ("#search") ||
 		      $ ("body").is ("#showmessage") ||
+          $("body").find(".chat_bar_list_item").is(".open") ||
+          $("body").find("#communicationTab ul > li:first-child").is(".ui-tabs-active") ||
+          $(document).find("#allianceBroadCast > div:first-child").is(":visible") ||
+          $(document).find("#allyRanks").is(":visible") ||
+          $(document).find("#allyText").is(":visible") ||
+          $(document).find("#allySettings").is(":visible") ||
+          $(document).find("#allyNameTage").is(":visible") ||
+          $(document).find("#allyRanks").is(":visible") ||
+          $(document).find("#allyRanks").is(":visible") ||
+          $(document).find(".new_msg_textarea.markItUpEditor").is(":focus") ||
+          $(document).find("input.textinput").is(":focus") ||
 		      ($ ("div").is ("#VLN_addevent") && ($ ("#VLN_addevent").css ("display") != "none")) ||
 		      ($ ("#anti_win").css ("display") == "block") ||
 		      (theHref.indexOf ("/game/index.php?page=alliance") >= 0) ||
@@ -694,7 +702,6 @@
 				if (e.shiftKey)
 					window.location = $ ("a[href*='page=ingame&component=alliance&tab=broadcast']").attr ("href");
 				else {
-					debugger;
 					if( theHref.indexOf("/game/index.php?page=ingame&component=fleetdispatch")<=0 )
 						window.location = $ ("a[href*='page=ingame&component=alliance'].menubutton").attr ("href");
 				}

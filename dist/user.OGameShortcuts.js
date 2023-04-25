@@ -172,6 +172,7 @@
 		});
 		return;
 	}
+
 	$ (document).keydown (function (e)
 	{
 		// console.log("%cShortcuts Info: %c"+e.keyCode, "color:lime", "color:white");
@@ -213,8 +214,12 @@
 				if (e.ctrlKey || e.altKey || e.metaKey)
 					break;
 				if (e.shiftKey && (theHref.indexOf("/game/index.php?page=ingame&component=fleetdispatch")>-1) ) {
-					if( $("#fleet2").is(":visible") )
-						simulateMouseClick ($ ("#backToFleet1"));
+					if( $("#fleet2").is(":visible") || $(document).find("#ago_fleet2").is(":visible") ) {
+						if( $("#backToFleet1").is(":visible") )
+							simulateMouseClick( $("#backToFleet1") );
+						else
+							simulateMouseClick( $(document).find("#backButton") );
+					}
 					return false;
 				}
 				break;
@@ -448,9 +453,18 @@
 				}
 				break;
 			case 65:	// "a"
-				if (e.ctrlKey || e.altKey || e.metaKey)
+				if (e.ctrlKey || e.metaKey)
 					break;
-				if (e.shiftKey) {
+
+				if( e.altKey ) {
+					/*OGame Infinity*/
+					if( $(document).find(".ogl-harvestOptions").length>0 ) {
+						if( $("#fleet2").is(":visible") )
+							simulateMouseClick( $(".secondcol.fleft .select-most") );
+
+						simulateMouseClick( $(".ogl-cargo .select-most") );
+					}
+				} else if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") )
 							simulateMouseClick ($ ("#missionButton1"));
@@ -462,13 +476,23 @@
 						simulateMouseClick( $(".overlayDiv #sendall") );
 						return false;
 					} else if( $("#sendall").is(":visible") ) {
-						if( !$("#fleet2").is(":visible") )
+						if( !$("#fleet2").is(":visible") ) {
 							simulateMouseClick ($ ("#sendall"));
+
+							/*OGame Infinity*/
+							if( $(document).find(".ogl-harvestOptions").length>0 )
+								simulateMouseClick( $(".ogl-cargo .sendall") );
+						}
 						return false;
 					}
 					else if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
 							simulateMouseClick ($ ("#allresources"));
+
+							/*OGame Infinity*/
+							if( $(document).find(".ogl-harvestOptions").length>0 ) {
+								simulateMouseClick( $(".ogl-cargo .sendall") );
+							}
 						}
 						return false;
 					}
@@ -515,6 +539,10 @@
 				if( e.altKey ) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						simulateMouseClick ($ ("#dbutton"))
+
+						if( $(document).find(".targetIcon.debris") )
+							simulateMouseClick ($ (".targetIcon.debris"))
+
 						return false;
 					}
 				} else if (e.shiftKey) {
@@ -656,6 +684,13 @@
 								simulateMouseClick ($ ("a.min").eq (1));
 							return false;
 						}
+
+						/*// OGame Infinity
+						if( $(document).find(".ogl-harvestOptions").length>0 ) {
+							ogi_k = $( $(".resourceIcon.crystal").parent().find("input")[0] ).val();
+							ogi_k_min = $( $(".resourceIcon.crystal").parent().find(".ogl-actions .") );
+							if( ogi_k==0 )
+						}*/
 					}
 					else
 					{
@@ -708,14 +743,20 @@
 				return false;
 				break;
 			case 77:	// "m"
+				debugger;
 				if (e.ctrlKey || e.metaKey)
 					break;
 				if( e.altKey ) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						simulateMouseClick ($ ("#mbutton"))
+
+						if( $(document).find(".targetIcon.moon") )
+							simulateMouseClick ($ (".targetIcon.moon"))
+
 						return false;
 					}
 				} else if (e.shiftKey) {
+					e.preventDefault();
 					/*if (theHref.indexOf ("/game/index.php?page=fleet2") > -1) {
 						simulateMouseClick ($ ("#mbutton"))
 						return false;
@@ -744,15 +785,23 @@
 				}
 				else
 				{
-					if( $(".comm_menu.messages").length>0 )
-						location.href = $(".comm_menu.messages").attr("href");
+					if( !theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")>-1 ) {}
+					else {
+						if( $(".comm_menu.messages").length>0 )
+							location.href = $(".comm_menu.messages").attr("href");
+					}
 					return false;
 				}
 				break;
 			case 78:	// "n"
-				if (e.ctrlKey || e.altKey || e.metaKey)
+				if (e.ctrlKey || e.metaKey)
 					break;
-				if (e.shiftKey) {
+
+				if( e.altKey ) {
+					/*OGame Infinity*/
+					if( $(document).find(".ogl-harvestOptions").length>0 )
+						simulateMouseClick( $(document).find(".ogl-cargo .send_none") );
+				} else if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
 							simulateMouseClick ($ ("#missionButton5"));
@@ -773,6 +822,10 @@
 						} else {
 							if ($ ("span.send_none > a").length > 0) {
 								simulateMouseClick ($ ("span.send_none > a"));
+
+								/*OGame Infinity*/
+								if( $(document).find(".ogl-harvestOptions").length>0 )
+									simulateMouseClick( $(document).find(".ogl-cargo .send_none") );
 								return false;
 							}
 						}
@@ -820,6 +873,10 @@
 				if( e.altKey ) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						simulateMouseClick ($ ("#pbutton"))
+
+						if( $(document).find(".targetIcon.planet") )
+							simulateMouseClick ($ (".targetIcon.planet"))
+
 						return false;
 					}
 				} else if (e.shiftKey) {
@@ -995,12 +1052,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='1']") );
-							$("#speedPercentage div.step[data-step='1']").addClass("selected");
-							$("#speedPercentage .bar").width(60);
-							$ ("#speed").val ("1").change ();
-							$ ("span.speed a").attr ("data-value", "1").text ("10");
+							$("#speedPercentage").data().percentageBarInstance.setValue(1);
 							return false;
 						}
 					}
@@ -1042,12 +1094,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='2']") );
-							$("#speedPercentage div.step[data-step='2']").addClass("selected");
-							$("#speedPercentage .bar").width(120);
-							$ ("#speed").val ("2").change ();
-							$ ("span.speed a").attr ("data-value", "2").text ("20");
+							$("#speedPercentage").data().percentageBarInstance.setValue(2);
 							return false;
 						}
 					}
@@ -1089,12 +1136,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='3']") );
-							$("#speedPercentage div.step[data-step='3']").addClass("selected");
-							$("#speedPercentage .bar").width(180);
-							$ ("#speed").val ("3").change ();
-							$ ("span.speed a").attr ("data-value", "3").text ("30");
+							$("#speedPercentage").data().percentageBarInstance.setValue(3);
 							return false;
 						}
 					}
@@ -1136,12 +1178,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='4']") );
-							$("#speedPercentage div.step[data-step='4']").addClass("selected");
-							$("#speedPercentage .bar").width(240);
-							$ ("#speed").val ("4").change ();
-							$ ("span.speed a").attr ("data-value", "4").text ("40");
+							$("#speedPercentage").data().percentageBarInstance.setValue(4);
 							return false;
 						}
 					}
@@ -1183,12 +1220,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='5']") );
-							$("#speedPercentage div.step[data-step='5']").addClass("selected");
-							$("#speedPercentage .bar").width(300);
-							$ ("#speed").val ("5").change ();
-							$ ("span.speed a").attr ("data-value", "5").text ("50");
+							$("#speedPercentage").data().percentageBarInstance.setValue(5);
 							return false;
 						}
 					}
@@ -1230,12 +1262,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='6']") );
-							$("#speedPercentage div.step[data-step='6']").addClass("selected");
-							$("#speedPercentage .bar").width(360);
-							$ ("#speed").val ("6").change ();
-							$ ("span.speed a").attr ("data-value", "6").text ("60");
+							$("#speedPercentage").data().percentageBarInstance.setValue(6);
 							return false;
 						}
 					}
@@ -1267,12 +1294,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='7']") );
-							$("#speedPercentage div.step[data-step='7']").addClass("selected");
-							$("#speedPercentage .bar").width(420);
-							$ ("#speed").val ("7").change ();
-							$ ("span.speed a").attr ("data-value", "7").text ("70");
+							$("#speedPercentage").data().percentageBarInstance.setValue(7);
 							return false;
 						}
 					}
@@ -1299,12 +1321,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='8']") );
-							$("#speedPercentage div.step[data-step='8']").addClass("selected");
-							$("#speedPercentage .bar").width(480);
-							$ ("#speed").val ("8").change ();
-							$ ("span.speed a").attr ("data-value", "8").text ("80");
+							$("#speedPercentage").data().percentageBarInstance.setValue(8);
 							return false;
 						}
 					}
@@ -1326,12 +1343,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='9']") );
-							$("#speedPercentage div.step[data-step='9']").addClass("selected");
-							$("#speedPercentage .bar").width(540);
-							$ ("#speed").val ("9").change ();
-							$ ("span.speed a").attr ("data-value", "9").text ("90");
+							$("#speedPercentage").data().percentageBarInstance.setValue(9);
 							return false;
 						}
 					}
@@ -1353,12 +1365,7 @@
 				if (e.shiftKey) {
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
 						if( $("#fleet2").is(":visible") ) {
-							$("#speedPercentage div.step").removeClass("selected");
-							simulateMouseClick( $("#speedPercentage div.step[data-step='10']") );
-							$("#speedPercentage div.step[data-step='10']").addClass("selected");
-							$("#speedPercentage .bar").width(600);
-							$ ("#speed").val ("10").change ();
-							$ ("span.speed a").attr ("data-value", "10").text ("100");
+							$("#speedPercentage").data().percentageBarInstance.setValue(10);
 							return false;
 						}
 					}

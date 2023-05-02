@@ -2,7 +2,7 @@
 // @name           OGame Redesign: Keyboard Shortcuts
 // @description    Assigns keyboard shortcuts to various game functions | Fixes for v8.7.0
 // @namespace      Vesselin | Modified by JBWKZ2099
-// @version        3.2
+// @version        3.2.1
 // @date           2012-12-14
 // @author         Vesselin Bontchev
 // @include        *://*.ogame.gameforge.com/game/index.php?*
@@ -743,7 +743,6 @@
 				return false;
 				break;
 			case 77:	// "m"
-				debugger;
 				if (e.ctrlKey || e.metaKey)
 					break;
 				if( e.altKey ) {
@@ -785,8 +784,7 @@
 				}
 				else
 				{
-					if( !theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")>-1 ) {}
-					else {
+					if( theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")<0 ) {
 						if( $(".comm_menu.messages").length>0 )
 							location.href = $(".comm_menu.messages").attr("href");
 					}

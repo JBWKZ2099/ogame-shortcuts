@@ -2,7 +2,7 @@
 // @name           OGame Redesign: Keyboard Shortcuts
 // @description    Assigns keyboard shortcuts to various game functions | Fixes for v8.7.0
 // @namespace      Vesselin | Modified by JBWKZ2099
-// @version        3.2.1
+// @version        3.2.2
 // @date           2012-12-14
 // @author         Vesselin Bontchev
 // @include        *://*.ogame.gameforge.com/game/index.php?*
@@ -463,20 +463,22 @@
 							simulateMouseClick( $(".secondcol.fleft .select-most") );
 
 						simulateMouseClick( $(".ogl-cargo .select-most") );
-					}
-				} else if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") )
-							simulateMouseClick ($ ("#missionButton1"));
+
 						return false;
 					}
-				}
+
+					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
+						simulateMouseClick( $(".ago_calc_resource_all") );
+						return false;
+					}
+				} 
 				else {
 					if( $(".overlayDiv #jumpgate").length>0 ) {
 						simulateMouseClick( $(".overlayDiv #sendall") );
 						return false;
 					} else if( $("#sendall").is(":visible") ) {
 						if( !$("#fleet2").is(":visible") ) {
+							simulateMouseClick( $(".ago_calc_resource_all") );
 							simulateMouseClick ($ ("#sendall"));
 
 							/*OGame Infinity*/
@@ -494,11 +496,6 @@
 								simulateMouseClick( $(".ogl-cargo .sendall") );
 							}
 						}
-						return false;
-					}
-					else if (theHref.indexOf ("/game/index.php?page=messages") > -1) {
-						if ($ ("#checkAll").length > 0)
-							$ (".checker").attr ("checked", true);
 						return false;
 					}
 				}
@@ -583,18 +580,12 @@
 						if( $("#fleet2").is(":visible") ) {
 							$ ("#position").val (16).keyup ();
 							simulateMouseClick ($ ("#pbutton"));
-							simulateMouseClick ($ ("#missionButton15"));
 							return false;
 						}
 					}
 				}
 				else {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( !$("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#ago_routine_7"));
-							return false;
-						}
-					} else {
+					if( theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")==-1 ) {
 						window.location = $ ("a[href*='page=ingame&component=research'].menubutton").attr ("href");
 						return false;
 					}
@@ -610,12 +601,7 @@
 				} else if (e.shiftKey)
 					window.location = $ ("a[href*='page=ingame&component=movement']").attr ("href");
 				else {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( !$("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#ago_routine_6"));
-							return false;
-						}
-					} else {
+					if( theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")==-1 ) {
 						window.location = $ ("a[href*='page=ingame&component=fleetdispatch'].menubutton").attr ("href");
 						return false;
 					}
@@ -648,14 +634,7 @@
 			case 72:	// "h"
 				if (e.ctrlKey || e.altKey || e.metaKey)
 					break;
-				if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton8"));
-							return false;
-						}
-					}
-				}
+				if (e.shiftKey) {}
 				else
 					simulateMouseClick ($ ("a[href*='page=ingame&component=search']"));
 				return false;
@@ -663,14 +642,7 @@
 			case 73:	// "i"
 				if (e.ctrlKey || e.altKey || e.metaKey)
 					break;
-				if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton6"));
-							return false;
-						}
-					}
-				}
+				if (e.shiftKey) {}
 				break;
 			case 75:	// "k"
 				if (e.ctrlKey || e.altKey || e.metaKey)
@@ -799,16 +771,8 @@
 					/*OGame Infinity*/
 					if( $(document).find(".ogl-harvestOptions").length>0 )
 						simulateMouseClick( $(document).find(".ogl-cargo .send_none") );
-				} else if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton5"));
-							return false;
-						}
-					}
-				}
-				else
-				{
+				} else if (e.shiftKey) {}
+				else {
 					//if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1)
 					if( $(".overlayDiv #jumpgate").length>0 ) {
 						simulateMouseClick( $(".overlayDiv span.send_none a") );
@@ -859,10 +823,7 @@
 						$ ("#position").focus ();
 						return false;
 					}
-				} else if (e.shiftKey)
-					simulateMouseClick ($ ("#eventboxFilled"));
-				else
-					window.location = $ ("a[href*='page=ingame&component=overview'].menubutton").attr ("href");
+				}
 				return false;
 				break;
 			case 80:	// "p"
@@ -877,18 +838,7 @@
 
 						return false;
 					}
-				} else if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=fleet2") > -1) {
-						simulateMouseClick ($ ("#pbutton"));
-						return false;
-					}
-					else if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton4"));
-							return false;
-						}
-					}
-				}
+				} else if (e.shiftKey) {}
 				else
 				{
 					if (theHref.indexOf ("/game/index.php?page=ingame&component=movement") > -1) {
@@ -909,14 +859,10 @@
 						return false;
 					}
 				} else {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( !$("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#ago_routine_4"));
-							return false;
-						}
-					} else
+					if( theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")==-1 ) {
 						window.location = $ ("a[href*='page=ingame&component=supplies'].menubutton").attr ("href");
 						return false;
+					}
 				}
 				break;
 			case 83:	// "s"
@@ -928,31 +874,13 @@
 						return false;
 					}
 				} else if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1)
-					{
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton2"));
-							return false;
-						}
-					}
-					/*else if (theHref.indexOf ("/game/index.php?page=fleet2") > -1)
-					{
-						$ ("#system").focus ();
-						return false;
-					}*/
-					else if (theHref.indexOf ("/game/index.php?page=ingame&component=galaxy") > -1)
-					{
+					if (theHref.indexOf ("/game/index.php?page=ingame&component=galaxy") > -1) {
 						$ ("#system_input").focus ();
 						return false;
 					}
 				}
 				else {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( !$("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#ago_routine_5"));
-							return false;
-						}
-					} else {
+					if( theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")==-1 ) {
 						window.location = $ ("a[href*='page=ingame&component=shipyard'].menubutton").attr ("href");
 						return false;
 					}
@@ -963,21 +891,9 @@
 					break;
 				if (e.altKey) {
 					window.location = $ ("a[href*='page=ingame&component=traderOverview'].menubutton").attr ("href") + "#page=traderImportExport";
-				} else if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton3"));
-							return false;
-						}
-					}
-				}
+				} else if (e.shiftKey) {}
 				else {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( !$("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#ago_routine_2"));
-							return false;
-						}
-					} else
+					if( theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch")==-1 )
 						window.location = $ ("a[href*='page=ingame&component=traderOverview'].menubutton").attr ("href") + "#page=traderImportExport";
 				}
 				return false;
@@ -985,12 +901,11 @@
 			case 85:  // "u"
 				if (e.ctrlKey || e.altKey || e.metaKey)
 					break;
-				if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-					if( !$("#fleet2").is(":visible") ) {
-						simulateMouseClick ($ ("#ago_routine_10"));
-						return false;
-					}
-				}
+				if (e.shiftKey)
+					simulateMouseClick ($ ("#eventboxFilled"));
+				else
+					window.location = $ ("a[href*='page=ingame&component=overview'].menubutton").attr ("href");
+				return false;
 				break;
 			case 86:	// "v"
 				if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey)
@@ -1023,26 +938,14 @@
 			case 89:	// "y"
 				if (e.ctrlKey || e.altKey || e.metaKey)
 					break;
-				if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton9"));
-							return false;
-						}
-					}
-				}
+				if (e.shiftKey) {}
 				break;
 			case 90:	// "z"
 				if (e.ctrlKey || e.altKey || e.metaKey)
 					break;
-				if (e.shiftKey) {
-					if (theHref.indexOf ("/game/index.php?page=ingame&component=fleetdispatch") > -1) {
-						if( $("#fleet2").is(":visible") ) {
-							simulateMouseClick ($ ("#missionButton7"));
-							return false;
-						}
-					}
-				}
+				if (e.shiftKey) {}
+
+				window.location = $ ("a[href*='page=ingame&component=traderOverview'].menubutton").attr ("href") + "#page=traderResources&animation=false";
 				break;
 			case 49:	// "1"
 				if (e.ctrlKey || e.metaKey)

@@ -1,12 +1,16 @@
+### v3.2.2
++ Se eliminan atajos del teclado que ya incorpora por defecto la versi√≥n 9 de AGR
++ Otros cambios y correcciones
+
 ### v3.2
-+ Correcciones en las p·ginas donde hay inputs y textareas (se ignoran los accesos si se est· escribiendo)
++ Correcciones en las p√°ginas donde hay inputs y textareas (se ignoran los accesos si se est√° escribiendo)
 + Se agrega readme.md al repositorio
 
 ---
 
 ### v3.0
-+ Correcciones en la validaciÛn de URLs
-+ Se arreglaron los accesos directos de la p·gina de flota cuando Antigame est· activo
++ Correcciones en la validaci√≥n de URLs
++ Se arreglaron los accesos directos de la p√°gina de flota cuando Antigame est√° activo
 + Otras correccions de atajos
 
 ---
@@ -18,6 +22,6 @@ Fix v6.0.X
 + Acceso directo al chat agregado
 + Se modificaron los atajos para que funcionen los atajos de la pagina fleet1 (con Antigame)
 + Se agregaron los atajos para Antigame e InfoCompte
-+ Se arreglÛ el problema de cambio de porcentaje de velocidad en "page=fleet2"
-+ Se agregÛ la posibilidad de desplegar la lista de Eventos de flotas en "page=fleet2"
-+ Ahora ya se pueden usar accesos directos desde las p·ginas de mensajes y chat
++ Se arregl√≥ el problema de cambio de porcentaje de velocidad en "page=fleet2"
++ Se agreg√≥ la posibilidad de desplegar la lista de Eventos de flotas en "page=fleet2"
++ Ahora ya se pueden usar accesos directos desde las p√°ginas de mensajes y chat
